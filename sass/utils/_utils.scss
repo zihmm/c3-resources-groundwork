@@ -1,0 +1,45 @@
+@function color($key: 'primary', $tint: null, $alpha: 1)
+{
+    $color: null;
+    $tints: map-get($colors, $key);
+
+    // Color with tint
+    @if type-of($tints) == 'map'
+    {
+        @if (type-of($tint) == 'string' and map-has-key($tints, $tint))
+        {
+            $color: map-get($tints, $tint);
+        }
+        @else
+        {
+            @error "Color tint '#{$tint}' not found.";
+        }
+    }
+
+        // Single Color
+    @else if type-of($tints) == 'color'
+    {
+        $color: $tints;
+    }
+
+        // Nothing found
+    @else
+    {
+        @error "Color #{$key} not found";
+    }
+
+    // Set opacity
+    @if ($alpha < 1)
+    {
+        $color: rgba($color, $alpha);
+    }
+
+    @return $color;
+}
+
+@mixin font($name, $size: 15px, $line: 140%)
+{
+    font-family: unquote(map-get($fonts, $name));
+    font-size: $size;
+    line-height: $line;
+}

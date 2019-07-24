@@ -1,0 +1,7 @@
+/* paragraphs */    p, a, span, blockquote,
+/* titles */        h1, h2, h3, h4,
+/* forms */         label, input, text, select, option, legend, button,
+/* list */          ul li
+{
+    @include font('text');
+}
